@@ -1,13 +1,43 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import UserList from '../components/UserList.js';
+import InputUser from '../components/InputUser'
 
 
 function UsersPage(){
     
-    const[users, setUsers ] = useState([]);
+    const usersData = [
+        {
+            id: 1,
+            username: "sth",
+            password: "sthsh"
+        },
+        {
+            id: 2,
+            username: "aaa",
+            password: "aaaaa"
+        },
+        {
+            id: 3,
+            username: "bbb",
+            password: "bbbbb"
+        },
+    ]
+
+    const[users, setUsers ] = useState([usersData]);
+    
+    useEffect(()=> {
+        axios.get("http://localhost:8080/users")
+        .then(response => {
+            setUsers(response.data.users)
+        })
+        .catch(error => console.log(error));
+    });
+    
 
     const addUser = (username, password) =>{
         const newUser = {
-            id:1,
+            id:4,
             username:username,
             password:password
         };
@@ -18,9 +48,11 @@ function UsersPage(){
         <div className="container">
             <div className="inner">
                 <InputUser addUser={addUser} />
-                <UserList userList={userList} />
+                <UserList users={users} />
             </div>
         </div>
 
     )
 }
+
+export default UsersPage;
