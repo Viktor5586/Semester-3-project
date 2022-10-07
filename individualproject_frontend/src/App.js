@@ -4,6 +4,7 @@ import{Route, Routes, BrowserRouter as Router} from "react-router-dom";
 import UsersPage from './pages/UsersPage.js';
 import NavBar from './components/NavBar';
 import InputUser from './components/InputUser';
+import Register from './pages/Register';
 /**
  return (
     <div className="App">
@@ -23,8 +24,14 @@ import InputUser from './components/InputUser';
 function App() {
   return(
     <div className="App">
-      <NavBar/>
-      <UsersPage/>
+      <Router>
+        <NavBar/>
+        <Routes>
+          <Route exact path='/' element={<UsersPage/>}/>
+          <Route exact path='/Register' element={<Register/>}/>
+        </Routes>
+      </Router>
+      
     </div>
   )
 }
