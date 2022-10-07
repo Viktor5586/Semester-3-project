@@ -3,9 +3,10 @@ import Users from "./Users";
 
 function UserList(props){
     return (
+      
         <ul>
-          {props.Users?.map(user => (
-            <UserList key={user} user={user} />
+          {props.users.map(user => (
+            <Users key={user.id} user={user} />
           ))}
         </ul>
       )

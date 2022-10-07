@@ -3,7 +3,7 @@ import styles from "./User.css"
 
 function Users(props){
     return (
-        <li className={styles.item}>{props.Users.username}</li>
+        <li className={styles.item}>{props.user.username}</li>
     )
 }
 
