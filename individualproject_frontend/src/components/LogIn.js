@@ -34,7 +34,6 @@ export const Login = () => {
               type: "LOGIN",
               payload: response.accessToken
           });
-            //Navigate("/");
           })
           .catch((error) =>{
             setData({
