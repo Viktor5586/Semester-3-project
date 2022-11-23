@@ -75,17 +75,29 @@ function App() {
           <Route exact path='/Register' element={<Register/>}/>
         </Routes>
       </Router>
+
+      // this one is working
+      <Router>
+        <NavBar/>
+        <Routes>
+          <Route exact path='/' element={<Login/>}/>
+          <Route exact path='/Home' element={<Home/>}/>
+        </Routes>
+      </Router>
+      <Header />
       
     </div>*/
     <AuthContext.Provider value={{state,dispatch}}>
       <Router>
-        <NavBar/>
-        <Routes>
+      <NavBar>
+        </NavBar>
+      <Routes>
+          <Route exact path='/' element={<Login/>}/>
           <Route exact path='/Home' element={<Home/>}/>
-          <Route exact path='/LogIn' element={<Login/>}/>
         </Routes>
+
+        <Home></Home>
       </Router>
-      <Header />
     </AuthContext.Provider>
   );
 }
