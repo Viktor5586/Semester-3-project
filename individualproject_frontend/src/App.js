@@ -77,14 +77,15 @@ function App() {
       </Router>
       
     </div>*/
-    <AuthContext.Provider
-      value={{
-        state,
-        dispatch
-      }}
-    >
+    <AuthContext.Provider value={{state,dispatch}}>
+      <Router>
+        <NavBar/>
+        <Routes>
+          <Route exact path='/Home' element={<Home/>}/>
+          <Route exact path='/LogIn' element={<Login/>}/>
+        </Routes>
+      </Router>
       <Header />
-      <div className="App">{!state.isAuthenticated ? <Login /> : <Home />}</div>
     </AuthContext.Provider>
   );
 }

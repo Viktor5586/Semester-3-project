@@ -2,9 +2,10 @@ import React from "react";
 import axios from "axios";
 import { AuthContext } from "../App.js";
 import LogInAPI from "../apis/LogInAPI.js";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 export const Login = () => {
   const {dispatch} = React.useContext(AuthContext);
+  const navigateToPage = useNavigate();
     const initialState = {
         username: "",
         password: "",
@@ -34,6 +35,7 @@ export const Login = () => {
               type: "LOGIN",
               payload: response.accessToken
           });
+          navigateToPage("/Home");
           })
           .catch((error) =>{
             setData({
