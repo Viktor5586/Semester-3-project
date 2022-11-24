@@ -96,7 +96,7 @@ function App() {
           <Route exact path='/Home' element={<Home/>}/>
         </Routes>
 
-        <Home></Home>
+
       </Router>
     </AuthContext.Provider>
   );
