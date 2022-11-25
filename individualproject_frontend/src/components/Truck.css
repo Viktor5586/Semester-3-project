@@ -1,0 +1,26 @@
+.truck-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.truck-card{
+    border: 1px solid purple;
+    border-radius: 15px;
+    width: 325px;
+    text-align: center;
+    margin: 10px;
+    padding-bottom: 15px;
+    margin-left:25px;
+}
+
+.truck-card:hover{
+    cursor: pointer;
+        transition: all 0.3s ease;
+        transform: scale(1.05);
+}
+
+.form-control{
+    width: 50%;
+}

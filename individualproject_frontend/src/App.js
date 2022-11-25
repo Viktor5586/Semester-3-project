@@ -10,6 +10,7 @@ import Login from "./components/LogIn.js";
 import Home from "./components/Home";
 import Header from "./components/Header";
 import jwtDecode from "jwt-decode";
+import Truck from "./components/Truck";
 /**
  return (
     <div className="App">
@@ -94,6 +95,7 @@ function App() {
       <Routes>
           <Route exact path='/' element={<Login/>}/>
           <Route exact path='/Home' element={<Home/>}/>
+          <Route exact path="/Truck" element={<Truck/>}/>
         </Routes>
 
 
