@@ -1,52 +1,51 @@
 import React from "react";
-import axios from "axios";
 import { AuthContext } from "../App.js";
 import LogInAPI from "../apis/LogInAPI.js";
 import { Navigate, useNavigate } from "react-router-dom";
 export const Login = () => {
-  const {dispatch} = React.useContext(AuthContext);
+  const { dispatch } = React.useContext(AuthContext);
   const navigateToPage = useNavigate();
-    const initialState = {
-        username: "",
-        password: "",
-        isSubmitting: false,
-        errorMessage: null
-      };
-    const [data, setData] = React.useState(initialState);
-    const handleInputChange = event => {
-        setData({
-          ...data,
-          [event.target.name]: event.target.value
-        });
-      };
-      const handleFormSubmit = event => {
-        event.preventDefault();
-        setData({
-          ...data,
-          isSubmitting: true,
-          errorMessage: null
-        });
+  const initialState = {
+    username: "",
+    password: "",
+    isSubmitting: false,
+    errorMessage: null,
+  };
+  const [data, setData] = React.useState(initialState);
+  const handleInputChange = (event) => {
+    setData({
+      ...data,
+      [event.target.name]: event.target.value,
+    });
+  };
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    setData({
+      ...data,
+      isSubmitting: true,
+      errorMessage: null,
+    });
 
-        LogInAPI.logInUser(data.username, data.password)
-          .then((response) => {
-            console.log(response);
-            console.log(response.accessToken);
-            dispatch({
-              type: "LOGIN",
-              payload: response.accessToken
-          });
-          navigateToPage("/Home");
-          })
-          .catch((error) =>{
-            setData({
-              ...data,
-              isSubmitting: false,
-              errorMessage: error.message || error.statusText,
-            });
-          });
-      };
-return (
-  /*<section className="vh-100 gradient-custom">
+    LogInAPI.logInUser(data.username, data.password)
+      .then((response) => {
+        console.log(response);
+        console.log(response.accessToken);
+        dispatch({
+          type: "LOGIN",
+          payload: response.accessToken,
+        });
+        navigateToPage("/Home");
+      })
+      .catch((error) => {
+        setData({
+          ...data,
+          isSubmitting: false,
+          errorMessage: error.message || error.statusText,
+        });
+      });
+  };
+  return (
+    /*<section className="vh-100 gradient-custom">
   <div className="container py-7 h-100">
     <div className="row d-flex justify-content-center align-items-center h-100">
       <div className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -110,7 +109,7 @@ return (
             {data.errorMessage && (
               <span className="form-error">{data.errorMessage}</span>
             )}
-    		<label htmlFor="username">
+            <label htmlFor="username">
               Email Address
               <input
                 type="text"
@@ -120,8 +119,8 @@ return (
                 id="username"
               />
             </label>
-			
-    		<label htmlFor="password">
+
+            <label htmlFor="password">
               Password
               <input
                 type="password"
@@ -132,17 +131,12 @@ return (
               />
             </label>
             <button disabled={data.isSubmitting}>
-              {data.isSubmitting ? (
-                "Loading..."
-              ) : (
-                "Login"
-              )}
+              {data.isSubmitting ? "Loading..." : "Login"}
             </button>
-          
-    	  </form>
+          </form>
         </div>
       </div>
     </div>
-);
+  );
 };
 export default Login;

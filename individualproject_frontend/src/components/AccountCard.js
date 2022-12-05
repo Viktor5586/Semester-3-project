@@ -9,11 +9,6 @@ export const AccountCard = ({ allUserEntities }) => {
               width="150px"
               src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
             ></img>
-
-            <span
-              className="text-black-50"
-              aria-readonly={allUserEntities.lastName}
-            ></span>
           </div>
         </div>
         <div className="col-md-5 border-right">
@@ -29,7 +24,7 @@ export const AccountCard = ({ allUserEntities }) => {
                   type="text"
                   className="form-control"
                   placeholder="First name"
-                  value={allUserEntities.firstName}
+                  defaultValue={allUserEntities.firstName}
                 ></input>
               </div>
               <div className="col-md-12">
@@ -38,7 +33,7 @@ export const AccountCard = ({ allUserEntities }) => {
                   type="text"
                   className="form-control"
                   placeholder="Last name"
-                  value={allUserEntities.lastName}
+                  defaultValue={allUserEntities.lastName}
                 ></input>
               </div>
               <div className="col-md-12">
@@ -47,7 +42,7 @@ export const AccountCard = ({ allUserEntities }) => {
                   type="text"
                   className="form-control"
                   placeholder="Username"
-                  value={allUserEntities.username}
+                  defaultValue={allUserEntities.username}
                 ></input>
               </div>
               <div className="col-md-12">
@@ -56,7 +51,7 @@ export const AccountCard = ({ allUserEntities }) => {
                   type="text"
                   className="form-control"
                   placeholder="Password"
-                  value={allUserEntities.password}
+                  defaultValue={allUserEntities.password}
                 ></input>
               </div>
             </div>

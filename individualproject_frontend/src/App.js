@@ -2,15 +2,13 @@ import React from "react";
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import UsersPage from "./pages/UsersPage.js";
 import NavBar from "./components/NavBar";
 import AccountPage from "./components/AccountPage";
-import Register from "./pages/Register";
 import Login from "./components/LogIn.js";
 import Home from "./components/Home";
-import Header from "./components/Header";
 import jwtDecode from "jwt-decode";
 import Truck from "./components/Truck";
+import OrderPage from "./components/OrderPage";
 /**
  return (
     <div className="App">
@@ -94,6 +92,7 @@ function App() {
           <Route exact path="/" element={<Login />} />
           <Route exact path="/Home" element={<Home />} />
           <Route exact path="/Truck" element={<Truck />} />
+          <Route exact path="/OrderPage" element={<OrderPage />} />
           <Route exact path="/AccountPage" element={<AccountPage />} />
         </Routes>
       </Router>

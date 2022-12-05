@@ -37,6 +37,9 @@ function NavBar() {
             <Link to="/Truck" className="btn btn-outline-light me-2">
               Trucks
             </Link>
+            <Link className="btn btn-outline-light me-2" to={"/OrderPage"}>
+              Order
+            </Link>
             <Link className="btn btn-outline-light me-2" to={"/AccountPage"}>
               My account
             </Link>
