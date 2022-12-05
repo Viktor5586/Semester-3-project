@@ -5,6 +5,11 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 export const OrderPage = () => {
   const navigateToPage = useNavigate();
+
+  //const decodeToken = jwtDecode(action.payload);
+
+  //localStorage.setItem("customerId", decodeToken.customerId);
+
   const initialState = {
     height: "",
     width: "",
@@ -13,6 +18,7 @@ export const OrderPage = () => {
     startPoint: "",
     endPoint: "",
     date: "",
+    customerId: localStorage.getItem("customerId"),
     isSubmitting: false,
     errorMessage: null,
   };
@@ -38,7 +44,8 @@ export const OrderPage = () => {
       data.weight,
       data.startPoint,
       data.endPoint,
-      data.date
+      data.date,
+      data.customerId
     )
       .then((response) => {
         navigateToPage("/Home");
