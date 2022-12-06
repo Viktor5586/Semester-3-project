@@ -23,6 +23,7 @@ const CargoAPI = {
         date: date,
         customerId: customerId,
       })
+      .get(URL)
       .then((response) => response.data),
 };
 

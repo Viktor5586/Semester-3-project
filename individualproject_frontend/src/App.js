@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import jwtDecode from "jwt-decode";
 import Truck from "./components/Truck";
 import OrderPage from "./components/OrderPage";
+import OrderReviewPage from "./components/OrderReviewPage";
 /**
  return (
     <div className="App">
@@ -41,12 +42,12 @@ const reducer = (state, action) => {
       localStorage.setItem("username", decodeToken.sub);
       localStorage.setItem("roles", decodeToken.roles);
       localStorage.setItem("customerId", decodeToken.customerId);
-
+      localStorage.setItem("employee", decodeToken.employeeId);
       return {
         ...state,
         isAuthenticated: true,
         username: decodeToken.username,
-        userId: decodeToken.customerId,
+        userId: decodeToken.customerId || decodeToken.employeeId,
         role: decodeToken.roles,
         token: action.payload.token,
       };
@@ -94,6 +95,7 @@ function App() {
           <Route exact path="/Truck" element={<Truck />} />
           <Route exact path="/OrderPage" element={<OrderPage />} />
           <Route exact path="/AccountPage" element={<AccountPage />} />
+          <Route exact path="/OrderReviewPage" element={<OrderReviewPage />} />
         </Routes>
       </Router>
     </AuthContext.Provider>
