@@ -1,10 +1,9 @@
 import CargoAPI from "../apis/CargoAPI.js";
 import React from "react";
 import { AuthContext } from "../App";
-import { useEffect, useState } from "react";
 
 const initialState = {
-  order: [],
+  orders: [],
   isFetching: false,
   hasError: false,
 };
@@ -22,7 +21,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         isFetching: false,
-        order: action.payload.cargoAllEntities, //винаги да казваш какво записваш от response-a
+        orders: action.payload.cargoAllEntities, //винаги да казваш какво записваш от response-a
       };
     case "FETCH_ADV_FAILURE":
       return {
@@ -35,16 +34,34 @@ const reducer = (state, action) => {
   }
 };
 
-export const OrderReviewPage = () => {
+function OrderReviewPage() {
   const { state: authState } = React.useContext(AuthContext);
   const [state, dispatch] = React.useReducer(reducer, initialState);
+
+  const checkIfApproved = (cargoAllEntities) => {
+    if (cargoAllEntities.approved === false) {
+      return (
+        <td>
+          <button type="button" className="btn btn-primary">
+            <i className="fa fa-eye" aria-hidden="true">
+              Additional information
+            </i>
+          </button>
+          <button type="button" className="btn btn-danger">
+            <i className="far fa-trash-alt">Delete</i>
+          </button>
+        </td>
+      );
+    } else {
+      return <td>Will delete!</td>;
+    }
+  };
 
   React.useEffect(() => {
     //console.log("Starting dispatching!");
     dispatch({ type: "FETCH_ADV-REQUEST" });
-    CargoAPI.order()
+    CargoAPI.loadOrders()
       .then((response) => {
-        // console.log(response);
         dispatch({
           type: "FETCH_ADV_SUCCESS",
           payload: response,
@@ -64,57 +81,53 @@ export const OrderReviewPage = () => {
         <span className="loader">Loading...</span>
       ) : state.hasError ? (
         <span className="error">
-          Error has occured when displaying our trucks. Sorry for the
+          Error has occured when displaying our orders. Sorry for the
           inconvenience!
         </span>
       ) : (
         <div className="container">
           <div className="py-4">
-            <table className="table border shadow">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Height</th>
-                  <th scope="col">Width</th>
-                  <th scope="col">Length</th>
-                  <th scope="col">Weight</th>
-                  <th scope="col">Star point</th>
-                  <th scope="col">End Point</th>
-                  <th scope="col">Date of delivery</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {CargoAPI.order.map((order, index) => (
-                  <tr>
-                    <td>{order.id}</td>
-                    <td>{order.height}</td>
-                    <td>{order.width}</td>
-                    <td>{order.length}</td>
-                    <td>{order.weight}</td>
-                    <td>{order.startPoint}</td>
-                    <td>{order.endPoint}</td>
-                    <td>{order.date}</td>
-                    if (order.approved == false){" "}
-                    {
-                      <td>
-                        <button type="button" class="btn btn-success">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger">
-                          <i class="far fa-trash-alt"></i>
-                        </button>
-                      </td>
-                    }
-                    else{<td>Will delete!</td>}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            {state.orders.length > 0 ? (
+              state.orders.map((cargoAllEntities) => (
+                <table className="table table-bordered border shadow">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Height</th>
+                      <th scope="col">Width</th>
+                      <th scope="col">Length</th>
+                      <th scope="col">Weight</th>
+                      <th scope="col">Star point</th>
+                      <th scope="col">End Point</th>
+                      <th scope="col">Date of delivery</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>{cargoAllEntities.id /*i should add key*/}</td>
+                      <td>{cargoAllEntities.height}</td>
+                      <td>{cargoAllEntities.width}</td>
+                      <td>{cargoAllEntities.length}</td>
+                      <td>{cargoAllEntities.weight}</td>
+                      <td>{cargoAllEntities.startPoint}</td>
+                      <td>{cargoAllEntities.endPoint}</td>
+                      <td>{cargoAllEntities.date.substring(0, 10)}</td>
+                      {checkIfApproved(cargoAllEntities)}
+                    </tr>
+                  </tbody>
+                </table>
+              ))
+            ) : (
+              <span className="noOrders">
+                Sorry! We don't have any orders for now...
+              </span>
+            )}
           </div>
         </div>
       )}
     </React.Fragment>
   );
-};
+}
 export default OrderReviewPage;

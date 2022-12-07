@@ -23,8 +23,9 @@ const CargoAPI = {
         date: date,
         customerId: customerId,
       })
-      .get(URL)
       .then((response) => response.data),
+
+  loadOrders: () => axios.get(URL).then((response) => response.data),
 };
 
 export default CargoAPI;

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 import { AuthContext } from "../App";
 import TrucksAPI from "../apis/TrucksAPI";
 import TruckCard from "./TruckCard";
@@ -58,17 +57,6 @@ function Truck() {
         });
       });
   }, [authState.token]);
-
-  // const [trucks, setTrucks] = useState([]);
-
-  // useEffect(() => {
-  //     loadTrucks();
-  // }, []);
-
-  // const loadTrucks = () =>{
-  //         TrucksAPI.loadTrucks()
-  //     .then((response) => response.data)
-  // };
   return (
     <React.Fragment>
       <input
@@ -100,36 +88,6 @@ function Truck() {
           )}
         </>
       )}
-      {/* <div className="card" style={{width: "18rem"}}>
-            <div className="card-body">
-                <h5 className="card-title">Truck</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-        </div>
-         <div className="card">
-         <div className="card-body">
-             <h5 className="card-title">Truck</h5>
-             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-         </div>
-     </div>
-     <div className="card" style={{width: "18rem"}}>
-            <div className="card-body">
-                <h5 className="card-title">Truck</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-        </div>
-        <div className="card" style={{width: "18rem"}}>
-            <div className="card-body">
-                <h5 className="card-title">Truck</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-        </div>
-        <div className="card" style={{width: "18rem"}}>
-            <div className="card-body">
-                <h5 className="card-title">Truck</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-        </div> */}
     </React.Fragment>
   );
 }
