@@ -42,7 +42,7 @@ export const AccountCard = ({ allUserEntities }) => {
                   type="text"
                   className="form-control"
                   placeholder="Username"
-                  defaultValue={allUserEntities.username}
+                  defaultValue={localStorage.getItem("username")}
                 ></input>
               </div>
               <div className="col-md-12">
@@ -50,8 +50,12 @@ export const AccountCard = ({ allUserEntities }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Password"
-                  defaultValue={allUserEntities.password}
+                  placeholder="Old password"
+                ></input>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="New password"
                 ></input>
               </div>
             </div>

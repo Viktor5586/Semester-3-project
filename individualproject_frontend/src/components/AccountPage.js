@@ -70,12 +70,17 @@ function AccountPage() {
       ) : (
         <>
           {state.user.length > 0 ? (
-            state.user.map((allUserEntities) => (
-              <AccountCard
-                key={allUserEntities.id}
-                allUserEntities={allUserEntities}
-              />
-            ))
+            state.user.map(
+              (allUserEntities) => (
+                console.log(localStorage.getItem("username")),
+                (
+                  <AccountCard
+                    key={allUserEntities.id}
+                    allUserEntities={allUserEntities}
+                  />
+                )
+              )
+            )
           ) : (
             <span className="noInfo">Sorry, sth went wrong...</span>
           )}
