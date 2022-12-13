@@ -47,6 +47,9 @@ function NavBar() {
             <Link to="/OrderReviewPage" className="btn btn-outline-light me-2">
               View orders
             </Link>
+            <Link to="/SomePage" className="btn btn-outline-light me-2">
+              notifications
+            </Link>
             <Link
               className="btn btn-outline-light me-2"
               onClick={handleLogOut}

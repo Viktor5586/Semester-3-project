@@ -10,6 +10,7 @@ import jwtDecode from "jwt-decode";
 import Truck from "./components/Truck";
 import OrderPage from "./components/OrderPage";
 import OrderReviewPage from "./components/OrderReviewPage";
+import SomePage from "./pages/SomePage";
 /**
  return (
     <div className="App">
@@ -96,6 +97,7 @@ function App() {
           <Route exact path="/OrderPage" element={<OrderPage />} />
           <Route exact path="/AccountPage" element={<AccountPage />} />
           <Route exact path="/OrderReviewPage" element={<OrderReviewPage />} />
+          <Route exact path="/SomePage" element={<SomePage />} />
         </Routes>
       </Router>
     </AuthContext.Provider>

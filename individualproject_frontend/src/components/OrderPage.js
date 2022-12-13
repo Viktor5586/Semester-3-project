@@ -1,14 +1,44 @@
-import React from "react";
 import styles from "./OrderPage.css";
 import CargoAPI from "../apis/CargoAPI.js";
+import React, { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import SockJS from "sockjs-client";
+import Stomp from "stompjs";
 
 export const OrderPage = () => {
   const navigateToPage = useNavigate();
 
   //const decodeToken = jwtDecode(action.payload);
+  const ENDPOINT = "http://localhost:8080/ws";
 
   //localStorage.setItem("customerId", decodeToken.customerId);
+  const [stompClient, setStompClient] = useState();
+
+  useEffect(() => {
+    // use SockJS as the websocket client
+    const socket = SockJS(ENDPOINT);
+    // Set stomp to use websockets
+    const stompClient = Stomp.over(socket);
+    // connect to the backend
+    stompClient.connect({}, () => {
+      // subscribe to the backend
+      stompClient.subscribe("/employee/employeeNotifications", (data) => {
+        console.log(data);
+        //onMessageReceived(data);
+      });
+    });
+    // maintain the client for sending and receiving
+    setStompClient(stompClient);
+  }, []);
+
+  const sendMessage = (notification) => {
+    const payload = {
+      id: notification.id,
+      text: "New order has been sent",
+    };
+    console.log(payload);
+    stompClient.send("/employee/notifications", {}, JSON.stringify(payload));
+  };
 
   const initialState = {
     height: "",
@@ -48,6 +78,7 @@ export const OrderPage = () => {
       data.customerId
     )
       .then((response) => {
+        sendMessage(response);
         navigateToPage("/Home");
       })
       .catch((error) => {
