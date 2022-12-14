@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import NotificationPanel from "../components/NotificationPanel";
 
 function SomePage() {
-  const [messagesReceived, setMessagesReceived] = useState([]);
+  const [notificationsReceived, setNotificationsReceived] = useState([]);
   const [stompClient, setStompClient] = useState();
   const ENDPOINT = "http://localhost:8080/ws";
   useEffect(() => {
@@ -16,21 +16,31 @@ function SomePage() {
     stompClient.connect({}, () => {
       // subscribe to the backend
       stompClient.subscribe("/employee/employeeNotifications", (data) => {
-        console.log(data);
+        console.log("HELLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOO" + data);
         onMessageReceived(data);
+        //onUsernameInformed();
       });
     });
     // maintain the client for sending and receiving
     setStompClient(stompClient);
   }, []);
   const onMessageReceived = (data) => {
-    const message = JSON.parse(data.body);
-    setMessagesReceived((messagesReceived) => [...messagesReceived, message]);
+    const notification = JSON.parse(data.body);
+    console.log(notification);
+    setNotificationsReceived((notificationsReceived) => [
+      ...notificationsReceived,
+      notification,
+    ]);
   };
 
+  // const onUsernameInformed = () => {
+  //   stompClient.subscribe(`/employee/employeeNotifications`, (data) => {
+  //     onMessageReceived(data);
+  //   });
+  // };
   return (
     <div className="App">
-      <NotificationPanel messagesReceived={messagesReceived} />
+      <NotificationPanel notificationsReceived={notificationsReceived} />
     </div>
   );
 }

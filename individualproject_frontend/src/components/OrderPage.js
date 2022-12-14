@@ -33,8 +33,8 @@ export const OrderPage = () => {
 
   const sendMessage = (notification) => {
     const payload = {
-      id: notification.id,
-      text: "New order has been sent",
+      "id": notification.id,
+      "text": "New order has been sent",
     };
     console.log(payload);
     stompClient.send("/employee/notifications", {}, JSON.stringify(payload));

@@ -23,12 +23,11 @@ const NotificationPanel = (notification) => {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      {notification.notificationsReceived.map((notification) => (
-        <NotificationReceived
-          key={notification.id}
-          text={notification.text}
-        ></NotificationReceived>
-      ))}
+
+      <NotificationReceived
+        key={notification.id}
+        text={notification.text}
+      ></NotificationReceived>
     </div>
   );
 };

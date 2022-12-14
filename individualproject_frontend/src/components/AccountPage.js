@@ -6,7 +6,11 @@ import AccountCard from "./AccountCard";
 /*have to fix problem*/
 
 const initialState = {
-  user: [],
+  id: localStorage.getItem("customerId"),
+  //user: [],
+  firstName: "",
+  lastName: "",
+  email: localStorage.getItem("username"),
   isFetching: false,
   hasError: false,
 };
@@ -20,11 +24,14 @@ const reducer = (state, action) => {
         hasError: false,
       };
     case "FETCH_ADV_SUCCESS":
-      //console.log(action.payload);
+      // console.log(action.payload);
+      // console.log(action.payload.firstName);
+      // console.log(action.payload.lastName);
       return {
         ...state,
         isFetching: false,
-        user: action.payload.allUserEntities, //винаги да казваш какво записваш от response-a
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName, //винаги да казваш какво записваш от response-a
       };
     case "FETCH_ADV_FAILURE":
       return {
@@ -42,8 +49,13 @@ function AccountPage() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   React.useEffect(() => {
     //console.log("Starting dispatching!");
-    dispatch({ type: "FETCH_ADV-REQUEST" });
-    UserAPI.loadUsers()
+    // dispatch({ type: "FETCH_ADV-REQUEST" });
+    // console.log(localStorage.getItem("customerId"));
+    // console.log(state.id);
+    // console.log(state.firstName);
+    // console.log(state.lastName);
+    // console.log(state.username);
+    UserAPI.loadUser(localStorage.getItem("customerId"))
       .then((response) => {
         // console.log(response);
         dispatch({
@@ -69,21 +81,12 @@ function AccountPage() {
         </span>
       ) : (
         <>
-          {state.user.length > 0 ? (
-            state.user.map(
-              (allUserEntities) => (
-                console.log(localStorage.getItem("username")),
-                (
-                  <AccountCard
-                    key={allUserEntities.id}
-                    allUserEntities={allUserEntities}
-                  />
-                )
-              )
-            )
-          ) : (
-            <span className="noInfo">Sorry, sth went wrong...</span>
-          )}
+          <AccountCard
+            key={state.id}
+            firstName={state.firstName}
+            lastName={state.lastName}
+            username={state.email}
+          />
         </>
       )}
     </React.Fragment>

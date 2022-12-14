@@ -1,4 +1,4 @@
-export const AccountCard = ({ allUserEntities }) => {
+export const AccountCard = ({ firstName, lastName, username }) => {
   return (
     <div className="container rounded bg-white mt-5 mb-5">
       <div className="row">
@@ -24,7 +24,7 @@ export const AccountCard = ({ allUserEntities }) => {
                   type="text"
                   className="form-control"
                   placeholder="First name"
-                  defaultValue={allUserEntities.firstName}
+                  defaultValue={firstName}
                 ></input>
               </div>
               <div className="col-md-12">
@@ -33,7 +33,7 @@ export const AccountCard = ({ allUserEntities }) => {
                   type="text"
                   className="form-control"
                   placeholder="Last name"
-                  defaultValue={allUserEntities.lastName}
+                  defaultValue={lastName}
                 ></input>
               </div>
               <div className="col-md-12">
@@ -42,7 +42,7 @@ export const AccountCard = ({ allUserEntities }) => {
                   type="text"
                   className="form-control"
                   placeholder="Username"
-                  defaultValue={localStorage.getItem("username")}
+                  defaultValue={username}
                 ></input>
               </div>
               <div className="col-md-12">
