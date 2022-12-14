@@ -56,6 +56,7 @@ function AccountPage() {
     // console.log(state.lastName);
     // console.log(state.username);
     UserAPI.loadUser(localStorage.getItem("customerId"))
+
       .then((response) => {
         // console.log(response);
         dispatch({

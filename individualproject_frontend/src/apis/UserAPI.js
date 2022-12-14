@@ -7,13 +7,13 @@ const GetUsersAPI = {
   loadUser: (id, firstName, lastName) =>
     axios.get(URL_OneUser + id).then((response) => response.data),
 
-  updateUser: (id, firstName, lastName, username, oldPassowrd, newPassword) =>
+  updateUser: (id, firstName, lastName, username, oldPassword, newPassword) =>
     axios.put(URl, {
       id: id,
       firstName: firstName,
       lastName: lastName,
       username: username,
-      oldPassowrd: oldPassowrd,
+      oldPassword: oldPassword,
       newPassword: newPassword,
     }),
   user: (firstName, lastName, username, password) =>
