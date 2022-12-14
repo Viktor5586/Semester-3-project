@@ -45,7 +45,13 @@ function NavBar() {
         return (
           <div className="text-end">
             <Link to="/OrderReviewPage" className="btn btn-outline-light me-2">
-              View orders
+              Manage orders
+            </Link>
+            <Link
+              to={"/TrucksReviewPage"}
+              className="btn btn-outline-light me-2"
+            >
+              Manage trucks
             </Link>
             <Link to="/SomePage" className="btn btn-outline-light me-2">
               notifications

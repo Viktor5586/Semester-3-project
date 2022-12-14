@@ -134,7 +134,7 @@ export const AccountCard = ({ firstName, lastName, username }) => {
                 <div className="col-md-12">
                   <label className="labels">Password</label>
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
                     placeholder="Old password"
                     defaultValue={data.oldPassword}
@@ -142,7 +142,7 @@ export const AccountCard = ({ firstName, lastName, username }) => {
                     name="oldPassword"
                   ></input>
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
                     placeholder="New password"
                     defaultValue={data.newPassword}
