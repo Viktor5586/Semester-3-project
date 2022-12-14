@@ -16,10 +16,15 @@ const GetUsersAPI = {
       oldPassowrd: oldPassowrd,
       newPassword: newPassword,
     }),
-};
-
-const GetUserAPI = {
-  // loadUser: () => axios.get(URL + "/" + id).then((response) => response.data),
+  user: (firstName, lastName, username, password) =>
+    axios
+      .post(URl + "/add", {
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+        password: password,
+      })
+      .then((response) => response.data),
 };
 
 export default GetUsersAPI;

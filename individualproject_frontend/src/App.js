@@ -11,6 +11,7 @@ import Truck from "./components/Truck";
 import OrderPage from "./components/OrderPage";
 import OrderReviewPage from "./components/OrderReviewPage";
 import SomePage from "./pages/SomePage";
+import Register from "./pages/Register";
 /**
  return (
     <div className="App">
@@ -92,6 +93,7 @@ function App() {
         <NavBar></NavBar>
         <Routes>
           <Route exact path="/" element={<Login />} />
+          <Route exact path="/Register" element={<Register />} />
           <Route exact path="/Home" element={<Home />} />
           <Route exact path="/Truck" element={<Truck />} />
           <Route exact path="/OrderPage" element={<OrderPage />} />
