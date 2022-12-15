@@ -2,6 +2,8 @@ import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import React, { useState, useEffect } from "react";
 import NotificationPanel from "../components/NotificationPanel";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SomePage() {
   const [notificationsReceived, setNotificationsReceived] = useState([]);
@@ -26,11 +28,32 @@ function SomePage() {
   }, []);
   const onMessageReceived = (data) => {
     const notification = JSON.parse(data.body);
-    console.log(notification);
+    // console.log("Tuk sum" + data.body);
+    showToastMessage(data.body);
     setNotificationsReceived((notificationsReceived) => [
       ...notificationsReceived,
       notification,
     ]);
+  };
+
+  const myPromise = new Promise((resolve) =>
+    fetch("http://localhost:8080/ws")
+      .then((response) => response.json())
+      .then((json) => setTimeout(() => resolve(json), 10000))
+  );
+
+  useEffect(() => {
+    toast.promise(myPromise, {
+      pending: "Checking for notifications",
+      success: "Promise  Loaded",
+      error: "error",
+    });
+  }, []);
+  const showToastMessage = (notification) => {
+    //console.log("Text:" + notification);
+    toast.success(notification, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
   };
 
   // const onUsernameInformed = () => {
@@ -39,8 +62,8 @@ function SomePage() {
   //   });
   // };
   return (
-    <div className="App">
-      <NotificationPanel notificationsReceived={notificationsReceived} />
+    <div>
+      <ToastContainer />
     </div>
   );
 }

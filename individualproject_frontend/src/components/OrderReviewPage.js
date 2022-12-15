@@ -3,12 +3,10 @@ import { AuthContext } from "../App";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import React, { useState, useEffect } from "react";
-
-// const [messagesReceived, setMessagesReceived] = useState([]);
-
+import NotificationPanel from "./NotificationPanel.js";
+// const [notificationsReceived, setNotificationsReceived] = useState([]);
 // const [stompClient, setStompClient] = useState();
 // const ENDPOINT = "http://localhost:8080/ws";
-
 // useEffect(() => {
 //   // use SockJS as the websocket client
 //   const socket = SockJS(ENDPOINT);
@@ -18,17 +16,21 @@ import React, { useState, useEffect } from "react";
 //   stompClient.connect({}, () => {
 //     // subscribe to the backend
 //     stompClient.subscribe("/employee/employeeNotifications", (data) => {
-//       console.log(data);
+//       console.log("HELLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOO" + data);
 //       onMessageReceived(data);
+//       //onUsernameInformed();
 //     });
 //   });
 //   // maintain the client for sending and receiving
 //   setStompClient(stompClient);
 // }, []);
-
 // const onMessageReceived = (data) => {
-//   const message = JSON.parse(data.body);
-//   setMessagesReceived((messagesReceived) => [...messagesReceived, message]);
+//   const notification = JSON.parse(data.body);
+//   console.log(notification);
+//   setNotificationsReceived((notificationsReceived) => [
+//     ...notificationsReceived,
+//     notification,
+//   ]);
 // };
 
 const initialState = {
@@ -36,6 +38,8 @@ const initialState = {
   isFetching: false,
   hasError: false,
 };
+
+// function displayFunctionality(){}
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -106,6 +110,8 @@ function OrderReviewPage() {
 
   return (
     <React.Fragment>
+      {/* <NotificationPanel notificationsReceived={notificationsReceived} /> */}
+
       {state.isFetching ? (
         <span className="loader">Loading...</span>
       ) : state.hasError ? (
