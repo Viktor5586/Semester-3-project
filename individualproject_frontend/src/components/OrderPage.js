@@ -22,7 +22,7 @@ export const OrderPage = () => {
     // connect to the backend
     stompClient.connect({}, () => {
       // subscribe to the backend
-      stompClient.subscribe("/employee/employeeNotifications", (data) => {
+      stompClient.subscribe("/user/sendNotification", (data) => {
         console.log(data);
         //onMessageReceived(data);
       });
@@ -33,11 +33,15 @@ export const OrderPage = () => {
 
   const sendMessage = (notification) => {
     const payload = {
-      "id": notification.id,
-      "text": "New order has been sent",
+      id: notification.id,
+      text: "New order has been sent",
     };
     console.log(payload);
-    stompClient.send("/employee/notifications", {}, JSON.stringify(payload));
+    stompClient.send(
+      "/employee/employeeNotifications",
+      {},
+      JSON.stringify(payload)
+    );
   };
 
   const initialState = {
