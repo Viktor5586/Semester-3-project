@@ -124,7 +124,10 @@ function OrderReviewPage() {
           <div className="py-4">
             {state.orders.length > 0 ? (
               state.orders.map((cargoAllEntities) => (
-                <table className="table table-bordered border shadow">
+                <table
+                  key={cargoAllEntities.id}
+                  className="table table-bordered border shadow"
+                >
                   <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -141,7 +144,7 @@ function OrderReviewPage() {
 
                   <tbody>
                     <tr>
-                      <td>{cargoAllEntities.id /*i should add key*/}</td>
+                      <td>{cargoAllEntities.id}</td>
                       <td>{cargoAllEntities.height}</td>
                       <td>{cargoAllEntities.width}</td>
                       <td>{cargoAllEntities.length}</td>

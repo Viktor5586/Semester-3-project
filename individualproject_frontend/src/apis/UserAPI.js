@@ -25,6 +25,10 @@ const GetUsersAPI = {
         password: password,
       })
       .then((response) => response.data),
+  deleteUser: (id) =>
+    axios.delete(URl + "/delete", {
+      customerId: id,
+    }),
 };
 
 export default GetUsersAPI;

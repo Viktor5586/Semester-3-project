@@ -37,19 +37,10 @@ export const TruckReviewPage = () => {
   const { state: authState } = React.useContext(AuthContext);
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
-  const checkIfApproved = (allTruckEntities) => {
-    return (
-      <td>
-        {/* <button type="button" className="btn btn-primary">
-            <i className="fa fa-eye" aria-hidden="true">
-                Info
-            </i>
-            </button> */}
-        <button type="button" className="btn btn-danger">
-          <i className="far fa-trash-alt">Delete</i>
-        </button>
-      </td>
-    );
+  const handleDeleteTruckButton = (truckId) => {
+    console.log("ID:::::" + truckId);
+    TruckAPI.deleteTruck(truckId);
+    //когато изтрия нещо, не се презарежда страницата, а трябва ръчно да го направя и тогава изтрития камион изчезва
   };
 
   React.useEffect(() => {
@@ -84,7 +75,10 @@ export const TruckReviewPage = () => {
           <div className="py-4">
             {state.trucks.length > 0 ? (
               state.trucks.map((allTruckEntities) => (
-                <table className="table table-bordered border shadow">
+                <table
+                  key={allTruckEntities.id}
+                  className="table table-bordered border shadow"
+                >
                   <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -100,14 +94,24 @@ export const TruckReviewPage = () => {
 
                   <tbody>
                     <tr>
-                      <td>{allTruckEntities.id /*i should add key*/}</td>
+                      <td>{allTruckEntities.id}</td>
                       <td>{allTruckEntities.height}</td>
                       <td>{allTruckEntities.width}</td>
                       <td>{allTruckEntities.length}</td>
                       <td>{allTruckEntities.maxWeight}</td>
                       <td>{allTruckEntities.tankVolume}</td>
                       <td>{allTruckEntities.fuelConsumptionPerKm}</td>
-                      {checkIfApproved(allTruckEntities)}
+                      <td>
+                        <button
+                          onClick={() =>
+                            handleDeleteTruckButton(allTruckEntities.id)
+                          }
+                          type="button"
+                          className="btn btn-danger"
+                        >
+                          <i className="far fa-trash-alt">Delete</i>
+                        </button>
+                      </td>
                     </tr>
                   </tbody>
                 </table>

@@ -78,6 +78,27 @@ export const AccountCard = ({ firstName, lastName, username }) => {
         });
     }
   };
+
+  const handleDeleteProfile = (event) => {
+    event.preventDefault();
+    setData({
+      ...data,
+      isSubmitting: true,
+      errorMessage: null,
+    });
+    UserAPI.deleteUser(data.id) //localStorage.getItem("customerId")
+      .then((response) => {
+        console.log(response);
+        navigateToPage("/Home");
+      })
+      .catch((error) => {
+        setData({
+          ...data,
+          isSubmitting: false,
+          errorMessage: error.message || error.statusText,
+        });
+      });
+  };
   return (
     <div className="container rounded bg-white mt-5 mb-5">
       <form onSubmit={handleFormSubmit}>
@@ -157,6 +178,13 @@ export const AccountCard = ({ firstName, lastName, username }) => {
                   disabled={data.isSubmitting}
                 >
                   {data.isSubmitting ? "Loading..." : "Save profile "}
+                </button>
+                <button
+                  className="btn btn-danger"
+                  disabled={data.isSubmitting}
+                  onClick={handleDeleteProfile}
+                >
+                  {data.isSubmitting ? "Loading..." : "Delete profile "}
                 </button>
               </div>
             </div>
