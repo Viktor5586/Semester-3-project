@@ -4,43 +4,13 @@ import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import React, { useState, useEffect } from "react";
 import NotificationPanel from "./NotificationPanel.js";
-// const [notificationsReceived, setNotificationsReceived] = useState([]);
-// const [stompClient, setStompClient] = useState();
-// const ENDPOINT = "http://localhost:8080/ws";
-// useEffect(() => {
-//   // use SockJS as the websocket client
-//   const socket = SockJS(ENDPOINT);
-//   // Set stomp to use websockets
-//   const stompClient = Stomp.over(socket);
-//   // connect to the backend
-//   stompClient.connect({}, () => {
-//     // subscribe to the backend
-//     stompClient.subscribe("/employee/employeeNotifications", (data) => {
-//       console.log("HELLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOO" + data);
-//       onMessageReceived(data);
-//       //onUsernameInformed();
-//     });
-//   });
-//   // maintain the client for sending and receiving
-//   setStompClient(stompClient);
-// }, []);
-// const onMessageReceived = (data) => {
-//   const notification = JSON.parse(data.body);
-//   console.log(notification);
-//   setNotificationsReceived((notificationsReceived) => [
-//     ...notificationsReceived,
-//     notification,
-//   ]);
-// };
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   orders: [],
   isFetching: false,
   hasError: false,
 };
-
-// function displayFunctionality(){}
-
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_ADV-REQUEST":
@@ -67,26 +37,59 @@ const reducer = (state, action) => {
   }
 };
 
+const handleDeleteOrderButton = (orderId) => {
+  CargoAPI.deleteOrder(orderId);
+};
+
 function OrderReviewPage() {
   const { state: authState } = React.useContext(AuthContext);
   const [state, dispatch] = React.useReducer(reducer, initialState);
+
+  const approveOrder = (cargo) => {
+    // console.log("ORDER id:" + cargo.id);
+    CargoAPI.approveOrder(cargo.id);
+  };
 
   const checkIfApproved = (cargoAllEntities) => {
     if (cargoAllEntities.approved === false) {
       return (
         <td>
-          <button type="button" className="btn btn-primary">
+          <button
+            // onClick={() => navigateToOrderSummary(cargoAllEntities)}
+            // onClick={() =>
+            //   navigateToPage("/OrderSummaryPage", {
+            //     OrderSummaryPage(cargoAllEntities) {},
+            //   })
+            // }
+            onClick={() => approveOrder(cargoAllEntities)}
+            type="button"
+            className="btn btn-primary"
+          >
             <i className="fa fa-eye" aria-hidden="true">
-              Additional information
+              Approve
             </i>
           </button>
-          <button type="button" className="btn btn-danger">
+          <button
+            onClick={() => handleDeleteOrderButton(cargoAllEntities.id)}
+            type="button"
+            className="btn btn-danger"
+          >
             <i className="far fa-trash-alt">Delete</i>
           </button>
         </td>
       );
     } else {
-      return <td>Will delete!</td>;
+      return (
+        <td>
+          <button
+            onClick={() => handleDeleteOrderButton(cargoAllEntities.id)}
+            type="button"
+            className="btn btn-danger"
+          >
+            <i className="far fa-trash-alt">Delete</i>
+          </button>
+        </td>
+      );
     }
   };
 

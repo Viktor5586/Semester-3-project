@@ -26,6 +26,21 @@ const CargoAPI = {
       .then((response) => response.data),
 
   loadOrders: () => axios.get(URL).then((response) => response.data),
+  deleteOrder: (orderId) =>
+    axios
+      .delete(URL + "/delete", {
+        data: {
+          orderId: orderId,
+        },
+      })
+      .then((response) => response.data),
+
+  approveOrder: (orderId) =>
+    axios
+      .put(URL, {
+        id: orderId,
+      })
+      .then((response) => response.data),
 };
 
 export default CargoAPI;
