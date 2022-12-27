@@ -26,9 +26,13 @@ const GetUsersAPI = {
       })
       .then((response) => response.data),
   deleteUser: (id) =>
-    axios.delete(URl + "/delete", {
-      customerId: id,
-    }),
+    axios
+      .delete(URl + "/delete", {
+        data: {
+          customerId: id,
+        },
+      })
+      .then((response) => response.data),
 };
 
 export default GetUsersAPI;
