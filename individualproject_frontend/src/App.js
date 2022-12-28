@@ -13,21 +13,8 @@ import OrderReviewPage from "./components/OrderReviewPage";
 import SomePage from "./pages/SomePage";
 import TrucksReviewPage from "./pages/TrucksReviewPage";
 import Register from "./pages/Register";
-/**
- return (
-    <div className="App">
-      <Router>
-      <NavBar>
-        <Routes>
-          <Route path="/UsersPage" element={<UsersPage />} />
-          <Route path="/Add user" element={<InputUser />} />
-        </Routes>
-        </NavBar>
-        <UsersPage></UsersPage>
-      </Router>
-    </div>
-  ); 
- */
+import CreateTruckPage from "./pages/CreateTruckPage";
+
 export const AuthContext = React.createContext();
 const initialState = {
   isAuthenticated: false,
@@ -41,7 +28,7 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
       const decodeToken = jwtDecode(action.payload);
-
+      localStorage.setItem("token", action.payload);
       localStorage.setItem("username", decodeToken.sub);
       localStorage.setItem("roles", decodeToken.roles);
       localStorage.setItem("customerId", decodeToken.customerId);
@@ -106,6 +93,7 @@ function App() {
             element={<TrucksReviewPage />}
           />
           <Route exact path="/SomePage" element={<SomePage />} />
+          <Route exact path="/CreateTruckPage" element={<CreateTruckPage />} />
         </Routes>
       </Router>
     </AuthContext.Provider>

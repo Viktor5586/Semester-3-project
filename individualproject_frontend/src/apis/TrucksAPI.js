@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosHeaders } from "axios";
 
 const URL = "http://localhost:8080/trucks";
 const GetTrucksAPI = {
@@ -12,6 +12,29 @@ const GetTrucksAPI = {
         // truckId,
       })
       .then((response) => response.data),
+  createTruck: (
+    licencePlate,
+    location,
+    height,
+    width,
+    length,
+    maxWeight,
+    tankVolume,
+    fuelConsumptionPerKm
+  ) =>
+    axios.post(URL + "/add", {
+      // headers: {
+      //   Authorization: `Bearer ${token}`,
+      // },
+      licencePlate: licencePlate,
+      location: location,
+      height: height,
+      width: width,
+      length: length,
+      maxWeight: maxWeight,
+      tankVolume: tankVolume,
+      fuelConsumptionPerKm: fuelConsumptionPerKm,
+    }),
 };
 
 export default GetTrucksAPI;
