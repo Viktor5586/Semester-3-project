@@ -28,12 +28,6 @@ export const AccountCard = ({ firstName, lastName, username }) => {
       isSubmitting: true,
       errorMessage: null,
     });
-
-    // console.log(data.firstName);
-    // console.log(data.lastName);
-    // console.log(data.username);
-    // console.log(data.oldPassword);
-    //console.log(data.newPassword);
     if (data.firstName != "" && data.lastName != "") {
       console.log(data.newPassword);
       UserAPI.updateUser(

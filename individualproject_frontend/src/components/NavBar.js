@@ -59,6 +59,9 @@ function NavBar() {
             <Link to="/CreateTruckPage" className="btn btn-outline-light me-2">
               Create truck
             </Link>
+            <Link to="/Register" className="btn btn-outline-light me-2">
+              Create employee account
+            </Link>
             <Link
               className="btn btn-outline-light me-2"
               onClick={handleLogOut}

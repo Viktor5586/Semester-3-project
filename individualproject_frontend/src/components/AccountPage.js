@@ -11,7 +11,7 @@ const initialState = {
   //user: [],
   firstName: "",
   lastName: "",
-  email: localStorage.getItem("username"),
+  // email: localStorage.getItem("username"),
   isFetching: false,
   hasError: false,
 };
@@ -25,9 +25,6 @@ const reducer = (state, action) => {
         hasError: false,
       };
     case "FETCH_ADV_SUCCESS":
-      // console.log(action.payload);
-      // console.log(action.payload.firstName);
-      // console.log(action.payload.lastName);
       return {
         ...state,
         isFetching: false,
@@ -53,7 +50,6 @@ function AccountPage() {
     UserAPI.loadUser(localStorage.getItem("customerId"))
 
       .then((response) => {
-        // console.log(response);
         dispatch({
           type: "FETCH_ADV_SUCCESS",
           payload: response,
@@ -81,7 +77,7 @@ function AccountPage() {
             key={state.id}
             firstName={state.firstName}
             lastName={state.lastName}
-            username={state.email}
+            username={localStorage.getItem("username")}
           />
         </>
       )}

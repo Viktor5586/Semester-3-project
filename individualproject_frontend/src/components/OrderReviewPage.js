@@ -38,9 +38,14 @@ const reducer = (state, action) => {
   }
 };
 
+const refreshPage = () => {
+  window.location.reload(false);
+};
+
 const handleDeleteOrderButton = (orderId) => {
   axiosInterceptor();
   CargoAPI.deleteOrder(orderId);
+  refreshPage();
 };
 
 function OrderReviewPage() {
@@ -51,6 +56,7 @@ function OrderReviewPage() {
     // console.log("ORDER id:" + cargo.id);
     axiosInterceptor();
     CargoAPI.approveOrder(cargo.id);
+    refreshPage();
   };
 
   const checkIfApproved = (cargoAllEntities) => {
