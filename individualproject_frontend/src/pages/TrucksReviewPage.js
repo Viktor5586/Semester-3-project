@@ -1,6 +1,7 @@
 import TruckAPI from "../apis/TrucksAPI.js";
 import { AuthContext } from "../App";
 import React, { useState, useEffect } from "react";
+import axiosInterceptor from "../apis/axiosInterceptor.js";
 
 const initialState = {
   trucks: [],
@@ -39,6 +40,7 @@ export const TruckReviewPage = () => {
 
   const handleDeleteTruckButton = (truckId) => {
     console.log("ID:::::" + truckId);
+    axiosInterceptor();
     TruckAPI.deleteTruck(truckId);
     //когато изтрия нещо, не се презарежда страницата, а трябва ръчно да го направя и тогава изтрития камион изчезва
   };
@@ -82,6 +84,8 @@ export const TruckReviewPage = () => {
                   <thead>
                     <tr>
                       <th scope="col">#</th>
+                      <th scope="col">Licence Plate</th>
+                      <th scope="col">Location</th>
                       <th scope="col">Height</th>
                       <th scope="col">Width</th>
                       <th scope="col">Length</th>
@@ -95,6 +99,8 @@ export const TruckReviewPage = () => {
                   <tbody>
                     <tr>
                       <td>{allTruckEntities.id}</td>
+                      <td>{allTruckEntities.licencePlate}</td>
+                      <td>{allTruckEntities.location}</td>
                       <td>{allTruckEntities.height}</td>
                       <td>{allTruckEntities.width}</td>
                       <td>{allTruckEntities.length}</td>

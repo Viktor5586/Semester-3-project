@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
+import axiosInterceptor from "../apis/axiosInterceptor.js";
 
 export const OrderPage = () => {
   const navigateToPage = useNavigate();
@@ -70,7 +71,7 @@ export const OrderPage = () => {
       isSubmitting: true,
       errorMessage: null,
     });
-
+    axiosInterceptor();
     CargoAPI.order(
       data.height,
       data.width,

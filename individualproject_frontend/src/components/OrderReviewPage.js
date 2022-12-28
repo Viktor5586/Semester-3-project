@@ -3,6 +3,7 @@ import { AuthContext } from "../App";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import React, { useState, useEffect } from "react";
+import axiosInterceptor from "../apis/axiosInterceptor.js";
 import NotificationPanel from "./NotificationPanel.js";
 import { useNavigate } from "react-router-dom";
 
@@ -38,6 +39,7 @@ const reducer = (state, action) => {
 };
 
 const handleDeleteOrderButton = (orderId) => {
+  axiosInterceptor();
   CargoAPI.deleteOrder(orderId);
 };
 
@@ -47,6 +49,7 @@ function OrderReviewPage() {
 
   const approveOrder = (cargo) => {
     // console.log("ORDER id:" + cargo.id);
+    axiosInterceptor();
     CargoAPI.approveOrder(cargo.id);
   };
 
@@ -96,6 +99,7 @@ function OrderReviewPage() {
   React.useEffect(() => {
     //console.log("Starting dispatching!");
     dispatch({ type: "FETCH_ADV-REQUEST" });
+    axiosInterceptor();
     CargoAPI.loadOrders()
       .then((response) => {
         dispatch({

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AuthContext } from "../App";
 import UserAPI from "../apis/UserAPI";
 import AccountCard from "./AccountCard";
+import axiosInterceptor from "../apis/axiosInterceptor.js";
 
 /*have to fix problem*/
 
@@ -48,13 +49,7 @@ function AccountPage() {
   const { state: authState } = React.useContext(AuthContext);
   const [state, dispatch] = React.useReducer(reducer, initialState);
   React.useEffect(() => {
-    //console.log("Starting dispatching!");
-    // dispatch({ type: "FETCH_ADV-REQUEST" });
-    // console.log(localStorage.getItem("customerId"));
-    // console.log(state.id);
-    // console.log(state.firstName);
-    // console.log(state.lastName);
-    // console.log(state.username);
+    axiosInterceptor();
     UserAPI.loadUser(localStorage.getItem("customerId"))
 
       .then((response) => {
