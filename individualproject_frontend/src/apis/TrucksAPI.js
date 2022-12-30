@@ -3,6 +3,9 @@ import axios, { AxiosHeaders } from "axios";
 const URL = "http://localhost:8080/trucks";
 const GetTrucksAPI = {
   loadTrucks: () => axios.get(URL).then((response) => response.data),
+  loadFilteredTrucks: (param, value) =>
+    axios.get(URL + `?${param}=${value}`).then((response) => response.data),
+
   deleteTruck: (truckId) =>
     axios
       .delete(URL + "/delete", {
