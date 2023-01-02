@@ -29,6 +29,7 @@ export const AccountCard = ({ firstName, lastName, username }) => {
       errorMessage: null,
     });
     if (data.firstName != "" && data.lastName != "") {
+      console.log(data.id);
       console.log(data.newPassword);
       UserAPI.updateUser(
         data.id,
@@ -50,28 +51,117 @@ export const AccountCard = ({ firstName, lastName, username }) => {
             errorMessage: error.message || error.statusText,
           });
         });
-    } else {
-      UserAPI.updateUser(
-        data.id,
-        firstName,
-        lastName,
-        data.username,
-        data.oldPassword,
-        data.newPassword
-      )
-        .then((response) => {
-          console.log(response);
-          navigateToPage("/Home");
-        })
-        .catch((error) => {
-          setData({
-            ...data,
-            isSubmitting: false,
-            errorMessage: error.message || error.statusText,
+    } else if (data.firstName === "" || data.lastName === "") {
+      console.log("a TUK sum");
+      if (data.firstName === "") {
+        data.firstName = firstName;
+        console.log("Ime 1 : " + data.firstName);
+        if (data.lastName === "") {
+          console.log("LAST:");
+          console.log("davam: " + lastName);
+          data.lastName = lastName;
+          console.log(data.lastName);
+        }
+        UserAPI.updateUser(
+          data.id,
+          data.firstName,
+          data.lastName,
+          data.username,
+          data.oldPassword,
+          data.newPassword
+        )
+          .then((response) => {
+            console.log("NEWWWW:" + data.newPassword);
+            console.log(response);
+            navigateToPage("/Truck");
+          })
+          .catch((error) => {
+            setData({
+              ...data,
+              isSubmitting: false,
+              errorMessage: error.message || error.statusText,
+            });
           });
-        });
+        console.log("first");
+      } else {
+        // UserAPI.updateUser(
+        //   data.id,
+        //   data.firstName,
+        //   data.lastName,
+        //   data.username,
+        //   data.oldPassword,
+        //   data.newPassword
+        // )
+        //   .then((response) => {
+        //     console.log("NEWWWW:" + data.newPassword);
+        //     console.log(response);
+        //     navigateToPage("/Truck");
+        //   })
+        //   .catch((error) => {
+        //     setData({
+        //       ...data,
+        //       isSubmitting: false,
+        //       errorMessage: error.message || error.statusText,
+        //     });
+        //   });
+        // console.log("last");
+      }
+
+      if (data.firstName !== "" && data.lastName !== "") {
+        console.log("TUK sum");
+        UserAPI.updateUser(
+          data.id,
+          data.firstName,
+          data.lastName,
+          data.username,
+          data.oldPassword,
+          data.newPassword
+        )
+          .then((response) => {
+            console.log(response);
+            navigateToPage("/Home");
+          })
+          .catch((error) => {
+            setData({
+              ...data,
+              isSubmitting: false,
+              errorMessage: error.message || error.statusText,
+            });
+          });
+      }
     }
+    // } else if (data.firstName == "" || data.lastName == "") {
+    //   console.log("podadeno:" + firstName);
+    //   console.log("promeneno na: " + data.firstName);
+    // }
   };
+  // } else {
+  //   console.log(data.firstName);
+  //   console.log(data.lastName);
+  //   console.log(data.username);
+  //   console.log(data.oldPassword);
+  //   console.log(data.newPassword);
+  //   UserAPI.updateUser(
+  //     data.id,
+  //     data.firstName,
+  //     data.lastName,
+  //     data.username,
+  //     data.oldPassword,
+  //     data.newPassword
+  //   )
+  //     .then((response) => {
+  //       console.log(response);
+  //       navigateToPage("/Home");
+  //     })
+  //     .catch((error) => {
+  //       setData({
+  //         ...data,
+  //         isSubmitting: false,
+  //         errorMessage: error.message || error.statusText,
+  //       });
+  //     });
+  // }
+  // };
 
   const handleDeleteProfile = (event) => {
     event.preventDefault();

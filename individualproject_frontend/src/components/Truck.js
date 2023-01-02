@@ -4,6 +4,8 @@ import { AuthContext } from "../App";
 import TrucksAPI from "../apis/TrucksAPI";
 import TruckCard from "./TruckCard";
 
+//взимам параметрите правилно и ги подавам към апи и резултатът е правилен,но не знам как да презаредя страницата с новите резултати
+
 const initialState = {
   trucks: [],
   filterValue: "",
@@ -75,6 +77,8 @@ function Truck() {
     TrucksAPI.loadFilteredTrucks(ref.current.id, data.filterValue)
       .then((response) => {
         console.log(response);
+        state.trucks(response);
+        // window.location.reload(false)
       })
       .catch((error) => {
         setData({
