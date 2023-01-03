@@ -14,6 +14,7 @@ import SomePage from "./pages/SomePage";
 import TrucksReviewPage from "./pages/TrucksReviewPage";
 import Register from "./pages/Register";
 import CreateTruckPage from "./pages/CreateTruckPage";
+import StaticsPage from "./pages/StatisticsPage";
 
 export const AuthContext = React.createContext();
 const initialState = {
@@ -94,6 +95,7 @@ function App() {
           />
           <Route exact path="/SomePage" element={<SomePage />} />
           <Route exact path="/CreateTruckPage" element={<CreateTruckPage />} />
+          <Route exact path="/StatisticsPage" element={<StaticsPage />} />
         </Routes>
       </Router>
     </AuthContext.Provider>

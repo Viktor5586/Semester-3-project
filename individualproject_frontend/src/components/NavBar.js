@@ -62,6 +62,9 @@ function NavBar() {
             <Link to="/Register" className="btn btn-outline-light me-2">
               Create employee account
             </Link>
+            <Link to="/StatisticsPage" className="btn btn-outline-light me-2">
+              Statistics
+            </Link>
             <Link
               className="btn btn-outline-light me-2"
               onClick={handleLogOut}

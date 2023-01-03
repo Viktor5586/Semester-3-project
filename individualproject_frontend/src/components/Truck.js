@@ -3,11 +3,13 @@ import { useState } from "react";
 import { AuthContext } from "../App";
 import TrucksAPI from "../apis/TrucksAPI";
 import TruckCard from "./TruckCard";
+import { render } from "@testing-library/react";
 
 //взимам параметрите правилно и ги подавам към апи и резултатът е правилен,но не знам как да презаредя страницата с новите резултати
 
 const initialState = {
   trucks: [],
+  filteredTrucks: [],
   filterValue: "",
   isFetching: false,
   hasError: false,
@@ -22,17 +24,22 @@ const reducer = (state, action) => {
         hasError: false,
       };
     case "FETCH_ADV_SUCCESS":
-      //console.log(action.payload);
       return {
         ...state,
         isFetching: false,
-        trucks: action.payload.allTruckEntities, //винаги да казваш какво записваш от response-a
+        trucks: action.payload.allTruckEntities,
       };
     case "FETCH_ADV_FAILURE":
       return {
         ...state,
         isFetching: false,
         hasError: true,
+      };
+    case "FETCH_ACV_FILTERED_SUCCESS":
+      return {
+        ...state,
+        isFetching: false,
+        filteredTrucks: action.payload.allTruckEntities,
       };
     default:
       return state;
@@ -56,29 +63,25 @@ function Truck() {
       ...data,
       [event.target.name]: event.target.value,
     });
-    // console.log(event.target.value);
   };
-
-  // const handleClick = () => {
-  //   console.log(ref.current.id);
-  //   // TrucksAPI.loadTrucks();
-  // };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    setData({
-      ...data,
-      isSubmitting: true,
-      errorMessage: null,
-    });
-    console.log(data.filterValue);
+    // console.log(data.filterValue);
 
-    console.log("TUK" + ref.current.id + "A tova: " + data.filterValue);
+    // console.log("TUK" + ref.current.id + "A tova: " + data.filterValue);
     TrucksAPI.loadFilteredTrucks(ref.current.id, data.filterValue)
       .then((response) => {
-        console.log(response);
-        state.trucks(response);
-        // window.location.reload(false)
+        dispatch({
+          type: "FETCH_ACV_FILTERED_SUCCESS",
+          payload: response,
+        });
+        setData({
+          ...data,
+          isSubmitting: true,
+          filteredTrucks: response,
+          errorMessage: null,
+        });
       })
       .catch((error) => {
         setData({
@@ -90,11 +93,9 @@ function Truck() {
   };
 
   React.useEffect(() => {
-    //console.log("Starting dispatching!");
     dispatch({ type: "FETCH_ADV-REQUEST" });
     TrucksAPI.loadTrucks()
       .then((response) => {
-        // console.log(response);
         dispatch({
           type: "FETCH_ADV_SUCCESS",
           payload: response,
@@ -107,6 +108,7 @@ function Truck() {
         });
       });
   }, [authState.token]);
+
   return (
     <React.Fragment>
       <form onSubmit={handleFormSubmit}>
@@ -202,7 +204,14 @@ function Truck() {
         </span>
       ) : (
         <>
-          {state.trucks.length > 0 ? (
+          {state.filteredTrucks.length > 0 ? (
+            state.filteredTrucks.map((allTruckEntities) => (
+              <TruckCard
+                key={allTruckEntities.id}
+                allTruckEntities={allTruckEntities}
+              />
+            ))
+          ) : state.trucks.length > 0 ? (
             state.trucks.map((allTruckEntities) => (
               <TruckCard
                 key={allTruckEntities.id}
@@ -219,4 +228,5 @@ function Truck() {
     </React.Fragment>
   );
 }
+
 export default Truck;
