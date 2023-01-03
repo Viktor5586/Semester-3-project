@@ -76,12 +76,6 @@ function Truck() {
           type: "FETCH_ACV_FILTERED_SUCCESS",
           payload: response,
         });
-        setData({
-          ...data,
-          isSubmitting: true,
-          filteredTrucks: response,
-          errorMessage: null,
-        });
       })
       .catch((error) => {
         setData({

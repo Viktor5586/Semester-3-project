@@ -7,7 +7,7 @@ import styles from "./NavBar.css";
 function NavBar() {
   const { state: authState, dispatch } = React.useContext(AuthContext);
 
-  const handleLogOut = (event) => {
+  const handleLogOut = () => {
     {
       dispatch({
         type: "LOGOUT",
@@ -92,29 +92,11 @@ function NavBar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-
         {authState.isAuthenticated ? (
-          authorize(localStorage.getItem("roles"))
-        ) : (
-          // <div className="text-end">
-          //   <Link to="/Truck" className="btn btn-outline-light me-2">
-          //     Trucks
-          //   </Link>
-          //   <Link className="btn btn-outline-light me-2" to={"/OrderPage"}>
-          //     Order
-          //   </Link>
-          //   <Link className="btn btn-outline-light me-2" to={"/AccountPage"}>
-          //     My account
-          //   </Link>
-          //   <Link
-          //     className="btn btn-outline-light me-2"
-          //     onClick={handleLogOut}
-          //     to={"/"}
-          //   >
-          //     Log out
-          //   </Link>
-          // </div>
-          //authorize(localStorage.getItem("roles"))
+          (console.log("vliza v auth"),
+          authorize(localStorage.getItem("roles")))
+        ) : localStorage.getItem("token") === null ||
+          localStorage.getItem("token") === undefined ? (
           <div className="text-end">
             <Link className="btn btn-outline-light me-2" to={"/Home"}>
               Home
@@ -123,6 +105,9 @@ function NavBar() {
               Log In
             </Link>
           </div>
+        ) : (
+          (console.log("vliza s rolq"),
+          authorize(localStorage.getItem("roles")))
         )}
       </nav>
     </div>
