@@ -4,7 +4,7 @@ import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import React, { useState, useEffect } from "react";
 import axiosInterceptor from "../apis/axiosInterceptor.js";
-import NotificationPanel from "./NotificationPanel.js";
+import NotificationPanel from "../components/NotificationPanel.js";
 import { useNavigate } from "react-router-dom";
 
 const initialState = {
@@ -63,28 +63,28 @@ function OrderReviewPage() {
     if (cargoAllEntities.approved === false) {
       return (
         <td>
-          <button
-            // onClick={() => navigateToOrderSummary(cargoAllEntities)}
-            // onClick={() =>
-            //   navigateToPage("/OrderSummaryPage", {
-            //     OrderSummaryPage(cargoAllEntities) {},
-            //   })
-            // }
-            onClick={() => approveOrder(cargoAllEntities)}
-            type="button"
-            className="btn btn-primary"
-          >
-            <i className="fa fa-eye" aria-hidden="true">
-              Approve
-            </i>
-          </button>
-          <button
-            onClick={() => handleDeleteOrderButton(cargoAllEntities.id)}
-            type="button"
-            className="btn btn-danger"
-          >
-            <i className="far fa-trash-alt">Delete</i>
-          </button>
+          <div className="actionOptionButtons">
+            <div className="approvebtn">
+              <button
+                onClick={() => approveOrder(cargoAllEntities)}
+                type="button"
+                className="btn btn-primary"
+              >
+                <i className="fa fa-eye" aria-hidden="true">
+                  Approve
+                </i>
+              </button>
+            </div>
+            <div className="deleteOrderbtn">
+              <button
+                onClick={() => handleDeleteOrderButton(cargoAllEntities.id)}
+                type="button"
+                className="btn btn-danger"
+              >
+                <i className="far fa-trash-alt">Delete</i>
+              </button>
+            </div>
+          </div>
         </td>
       );
     } else {

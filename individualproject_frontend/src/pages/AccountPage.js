@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AuthContext } from "../App";
 import UserAPI from "../apis/UserAPI";
-import AccountCard from "./AccountCard";
+import AccountCard from "../components/AccountCard";
 import axiosInterceptor from "../apis/axiosInterceptor.js";
 
 /*have to fix problem*/

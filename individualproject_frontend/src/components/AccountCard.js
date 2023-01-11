@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { AuthContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import UserAPI from "../apis/UserAPI";
+import styles from "../components/AccountCard.css";
 export const AccountCard = ({ firstName, lastName, username }) => {
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
   const navigateToPage = useNavigate();
   const initialState = {
     id: localStorage.getItem("customerId"),
@@ -83,30 +87,7 @@ export const AccountCard = ({ firstName, lastName, username }) => {
             });
           });
         console.log("first");
-      } else {
-        // UserAPI.updateUser(
-        //   data.id,
-        //   data.firstName,
-        //   data.lastName,
-        //   data.username,
-        //   data.oldPassword,
-        //   data.newPassword
-        // )
-        //   .then((response) => {
-        //     console.log("NEWWWW:" + data.newPassword);
-        //     console.log(response);
-        //     navigateToPage("/Truck");
-        //   })
-        //   .catch((error) => {
-        //     setData({
-        //       ...data,
-        //       isSubmitting: false,
-        //       errorMessage: error.message || error.statusText,
-        //     });
-        //   });
-        // console.log("last");
       }
-
       if (data.firstName !== "" && data.lastName !== "") {
         console.log("TUK sum");
         UserAPI.updateUser(
@@ -130,38 +111,7 @@ export const AccountCard = ({ firstName, lastName, username }) => {
           });
       }
     }
-    // } else if (data.firstName == "" || data.lastName == "") {
-    //   console.log("podadeno:" + firstName);
-    //   console.log("promeneno na: " + data.firstName);
-    // }
   };
-  // } else {
-  //   console.log(data.firstName);
-  //   console.log(data.lastName);
-  //   console.log(data.username);
-  //   console.log(data.oldPassword);
-  //   console.log(data.newPassword);
-  //   UserAPI.updateUser(
-  //     data.id,
-  //     data.firstName,
-  //     data.lastName,
-  //     data.username,
-  //     data.oldPassword,
-  //     data.newPassword
-  //   )
-  //     .then((response) => {
-  //       console.log(response);
-  //       navigateToPage("/Home");
-  //     })
-  //     .catch((error) => {
-  //       setData({
-  //         ...data,
-  //         isSubmitting: false,
-  //         errorMessage: error.message || error.statusText,
-  //       });
-  //     });
-  // }
-  // };
 
   const handleDeleteProfile = (event) => {
     event.preventDefault();
@@ -173,7 +123,9 @@ export const AccountCard = ({ firstName, lastName, username }) => {
     UserAPI.deleteUser(data.id) //localStorage.getItem("customerId")
       .then((response) => {
         console.log(response);
-        navigateToPage("/Home");
+        localStorage.clear();
+        navigateToPage("/");
+        refreshPage();
       })
       .catch((error) => {
         setData({
@@ -185,7 +137,7 @@ export const AccountCard = ({ firstName, lastName, username }) => {
   };
   return (
     <div className="container rounded bg-white mt-5 mb-5">
-      <form onSubmit={handleFormSubmit}>
+      <form className="profileForm" onSubmit={handleFormSubmit}>
         <div className="row">
           <div className="col-md-3 border-right">
             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -246,6 +198,8 @@ export const AccountCard = ({ firstName, lastName, username }) => {
                     onChange={handleInputChange}
                     name="oldPassword"
                   ></input>
+                </div>
+                <div className="col-md-12">
                   <input
                     type="password"
                     className="form-control"
@@ -263,6 +217,7 @@ export const AccountCard = ({ firstName, lastName, username }) => {
                 >
                   {data.isSubmitting ? "Loading..." : "Save profile "}
                 </button>
+                <br />
                 <button
                   className="btn btn-danger"
                   disabled={data.isSubmitting}

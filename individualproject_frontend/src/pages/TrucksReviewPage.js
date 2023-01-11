@@ -8,6 +8,9 @@ const initialState = {
   isFetching: false,
   hasError: false,
 };
+const refreshPage = () => {
+  window.location.reload(false);
+};
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -42,6 +45,7 @@ export const TruckReviewPage = () => {
     console.log("ID:::::" + truckId);
     axiosInterceptor();
     TruckAPI.deleteTruck(truckId);
+    refreshPage();
     // когато изтрия нещо, не се презарежда страницата,
     //  а трябва ръчно да го направя и тогава изтрития камион изчезва
   };

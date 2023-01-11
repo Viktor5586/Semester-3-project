@@ -1,26 +1,66 @@
-.truck-container{
+.filter .content{
+    margin-left: 25%;
+    width: 40%;
+    z-index: 1;
+    border:solid #0275d8;
+    border-radius: 5px;
+    border-width: 2px;
+}
+
+.form-control{
+    width: 50%; 
+} 
+
+.filter .radioButtons{
+    margin-top: 5%;
+    margin-left: 10%;
+    display: flex;
+    gap: 3%;
+}
+
+.filter .submit-part{
+    margin-top: 2%;
+    margin-left: 30%;
+    margin-bottom: 7%;
+}
+
+.filter .submit-part button{
+    margin-top: 2%;
+    margin-left: 15%;
+}
+
+.trucksPageHeader{
+    margin-top: 5%;
+    text-align: center;
+    align-items: center;
+    margin-right: 10%;
+}
+
+.row .card{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: flex-start;
-}
-.truck-card{
-    border: 1px solid purple;
-    border-radius: 15px;
-    width: 325px;
-    text-align: center;
-    margin: 10px;
-    padding-bottom: 15px;
-    margin-left:25px;
+    margin-top: 2%;
+    margin-left: 40%;
+    padding-bottom: 1%;
+    margin-bottom: 5%;
+    border-style: solid;
+    border-color: #0275d8;
 }
 
-.truck-card:hover{
-    cursor: pointer;
-        transition: all 0.3s ease;
-        transform: scale(1.05);
+.card .card-body{
+    justify-content: center;
+    margin-left: 25%;
+}
+.card .card-body ul{
+    justify-content: center;
+    margin-right: 20%;
+    margin-left: 17.5%;
 }
 
-.form-control{
-    width: 50%;
+.card .card-body h5{
+    margin-left: 25%;
+    margin-bottom: 10%;
 }

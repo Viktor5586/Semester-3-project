@@ -2,8 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { AuthContext } from "../App";
 import TrucksAPI from "../apis/TrucksAPI";
-import TruckCard from "./TruckCard";
+import TruckCard from "../components/TruckCard";
 import { render } from "@testing-library/react";
+import styles from "../components/Truck.css";
 
 //взимам параметрите правилно и ги подавам към апи и резултатът е правилен,но не знам как да презаредя страницата с новите резултати
 
@@ -106,89 +107,102 @@ function Truck() {
   return (
     <React.Fragment>
       <form onSubmit={handleFormSubmit}>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="filter"
-            id="location"
-            onChange={handleChange}
-            // disabled={filter}
-          />
-          <label className="form-check-label" htmlFor="flexRadioDefault1">
-            Location
-          </label>
+        <div className="filter">
+          <div className="content">
+            <div className="radioButtons">
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="filter"
+                  id="location"
+                  onChange={handleChange}
+                  // disabled={filter}
+                />
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                  Location
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="filter"
+                  id="height"
+                  onChange={handleChange}
+                  // disabled={filter}
+                />
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                  Height
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="filter"
+                  id="width"
+                  onChange={handleChange}
+                  // disabled={filter}
+                />
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                  Width
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="filter"
+                  id="length"
+                  onChange={handleChange}
+                  // disabled={filter}
+                />
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                  Length
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="filter"
+                  id="maxWeight"
+                  onChange={handleChange}
+                  // disabled={filter}
+                />
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                  Max weight
+                </label>
+              </div>
+            </div>
+            <div className="submit-part">
+              <div className="form-filter-text">
+                <input
+                  className="form-control"
+                  id="myInput"
+                  type="text"
+                  name="filterValue"
+                  placeholder="Search.."
+                  disabled={!filter}
+                  defaultValue={data.filterValue}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <button
+                className="btn btn-primary"
+                disabled={!filter}
+                // onClick={handleClick}
+              >
+                Search
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="filter"
-            id="height"
-            onChange={handleChange}
-            // disabled={filter}
-          />
-          <label className="form-check-label" htmlFor="flexRadioDefault1">
-            Height
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="filter"
-            id="width"
-            onChange={handleChange}
-            // disabled={filter}
-          />
-          <label className="form-check-label" htmlFor="flexRadioDefault1">
-            Width
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="filter"
-            id="length"
-            onChange={handleChange}
-            // disabled={filter}
-          />
-          <label className="form-check-label" htmlFor="flexRadioDefault1">
-            Length
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="filter"
-            id="maxWeight"
-            onChange={handleChange}
-            // disabled={filter}
-          />
-          <label className="form-check-label" htmlFor="flexRadioDefault1">
-            Max weight
-          </label>
-        </div>
-        <input
-          className="form-control"
-          id="myInput"
-          type="text"
-          name="filterValue"
-          placeholder="Search.."
-          disabled={!filter}
-          defaultValue={data.filterValue}
-          onChange={handleInputChange}
-        />
-        <button
-          className="btn btn-primary"
-          disabled={!filter}
-          // onClick={handleClick}
-        >
-          Search
-        </button>
       </form>
+      <div className="trucksPageHeader">
+        <h4>Welcome to our website! Below you can see our offers:</h4>
+      </div>
       {state.isFetching ? (
         <span className="loader">Loading...</span>
       ) : state.hasError ? (

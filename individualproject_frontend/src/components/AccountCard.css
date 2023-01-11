@@ -1,0 +1,13 @@
+.profileForm{
+    margin-left: 25%;
+}
+.col-md-12 input[type="password"]{
+    margin-left: 4.75%;
+}
+
+
+.profileForm button{
+    width: 40%;
+    margin-top: 1%;
+    margin-right: 55%;
+}

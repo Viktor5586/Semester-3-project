@@ -78,12 +78,14 @@ export const Login = () => {
               {data.isSubmitting ? "Loading..." : "Login"}
             </button>
           </form>
-          <p className="small fw-bold mt-2 pt-1 mb-0">
-            Don't have an account?{" "}
-            <a href="/Register" className="link-danger">
-              Register
-            </a>
-          </p>
+          <div className="goToRegister">
+            <p className="small fw-bold mt-2 pt-1 mb-0">
+              Don't have an account?{" "}
+              <a href="/Register" className="link-danger">
+                Register
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </div>

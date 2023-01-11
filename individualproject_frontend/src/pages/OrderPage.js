@@ -72,6 +72,7 @@ export const OrderPage = () => {
       errorMessage: null,
     });
     axiosInterceptor();
+    console.log("Height:" + data.height);
     CargoAPI.order(
       data.height,
       data.width,

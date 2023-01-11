@@ -1,8 +1,7 @@
 import StaticsAPI from "../apis/StatisticsAPI.js";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const initialState = {
-  // stats: [],
   trucks: "",
   approved: "",
   notApproved: "",
@@ -27,7 +26,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         isFetching: false,
-        // stats: action.payload,
         approved: action.payload.approved,
         notApproved: action.payload.notApproved,
         trucks: action.payload.trucks,
@@ -50,7 +48,6 @@ const reducer = (state, action) => {
 const StaticsPage = () => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   React.useEffect(() => {
-    //console.log("Starting dispatching!");
     dispatch({ type: "FETCH_ADV-REQUEST" });
     console.log(StaticsAPI.loadStatistics());
     StaticsAPI.loadStatistics()
@@ -68,54 +65,6 @@ const StaticsPage = () => {
         });
       });
   }, []);
-  //   var myData = {
-  //     chart: {
-  //       caption: "Orders ratio",
-  //       subCaption: "Downloads (In Millions)",
-  //       canvasBgAlpha: "0",
-  //       bgColor: "#ffffff",
-  //       bgAlpha: "70",
-  //       baseFont: "Roboto",
-  //       baseFontSize: "14",
-  //       showAlternateVGridColor: "1",
-  //       alternateVGridAlpha: "5",
-  //       labelFontSize: "15",
-  //       captionFontSize: "20",
-  //       subCaptionFontSize: "16",
-  //       toolTipColor: "#000000",
-  //       toolTipBgColor: "#ffffff",
-  //       toolTipAlpha: "90",
-  //       captionFontBold: "0",
-  //       subCaptionFontBold: "0",
-  //       paletteColors: "#8E24AA",
-  //       valueFontSize: "13",
-  //       valueFontBold: "0",
-  //       animation: "0",
-  //       divLineAlpha: "15",
-  //       divLineDashed: "0",
-  //       plotFillAlpha: "90",
-  //       theme: "ocean",
-  //     },
-  //     data: [
-  //       {
-  //         label: "Approved",
-  //         value: `${StaticsAPI.loadOrderStatisticsByApproval("approved")}`,
-  //       },
-  //       {
-  //         label: "Approved",
-  //         value: `${StaticsAPI.loadOrderStatisticsByApproval("notApproved")}`,
-  //       },
-  //     ],
-  //   };
-  //   var barChartConfigs = {
-  //     id: "bar-chart",
-  //     renderAt: "chart-container",
-  //     type: "bar2d",
-  //     width: "100%",
-  //     height: 400,
-  //     dataFormat: "json",
-  //     dataSource: myData,
-  //   };
   return (
     <React.Fragment>
       <div className="main-content">

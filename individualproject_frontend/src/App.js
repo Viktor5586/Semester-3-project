@@ -3,13 +3,13 @@ import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import AccountPage from "./components/AccountPage";
-import Login from "./components/LogIn.js";
+import AccountPage from "./pages/AccountPage";
+import Login from "./pages/LogIn.js";
 import Home from "./components/Home";
 import jwtDecode from "jwt-decode";
-import Truck from "./components/Truck";
-import OrderPage from "./components/OrderPage";
-import OrderReviewPage from "./components/OrderReviewPage";
+import Truck from "./pages/Truck";
+import OrderPage from "./pages/OrderPage";
+import OrderReviewPage from "./pages/OrderReviewPage";
 import SomePage from "./pages/SomePage";
 import TrucksReviewPage from "./pages/TrucksReviewPage";
 import Register from "./pages/Register";
@@ -33,7 +33,7 @@ const reducer = (state, action) => {
       localStorage.setItem("username", decodeToken.sub);
       localStorage.setItem("roles", decodeToken.roles);
       localStorage.setItem("customerId", decodeToken.customerId);
-      localStorage.setItem("employee", decodeToken.employeeId);
+      localStorage.setItem("employeeId", decodeToken.employeeId);
       return {
         ...state,
         isAuthenticated: true,
