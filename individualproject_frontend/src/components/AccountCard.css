@@ -1,7 +1,7 @@
 .profileForm{
     margin-left: 25%;
 }
-.profileForm.col-md-12 input[type="password"]{
+.profileForm .col-md-12 input[type="password"]{
     margin-left: 4.75%;
 }
 

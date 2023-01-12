@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import TRUCKAPI from "../apis/TrucksAPI.js";
 import axiosInterceptor from "../apis/axiosInterceptor.js";
+import style from "./CreateTruckPage.css";
 
 export const CreateTruckPage = () => {
   const navigateToPage = useNavigate();

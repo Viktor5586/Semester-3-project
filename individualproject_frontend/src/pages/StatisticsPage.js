@@ -1,5 +1,7 @@
 import StaticsAPI from "../apis/StatisticsAPI.js";
 import React from "react";
+import { Chart } from "react-google-charts";
+import style from "./StatisticsPage.css";
 
 const initialState = {
   trucks: "",
@@ -65,9 +67,65 @@ const StaticsPage = () => {
         });
       });
   }, []);
+  const ordersByDateData = [
+    ["Type", "Value"],
+    ["Orders today", state.ordersToday],
+    ["Orders before", state.ordersBefore],
+    ["Orders after", state.ordersAfter],
+  ];
+
+  const ordersByApproval = [
+    ["Approved", "Value"],
+    ["Orders approved", state.approved],
+    ["Orders not approved", state.notApproved],
+  ];
+
+  const ordersOptions = {
+    title: "Orders statistics",
+    is3D: true,
+  };
+
+  const trucksEmployeeCustomerData = [
+    ["Type", "Trucks", "Employees", "Customers"],
+    ["2022", state.trucks, state.employees, state.customers],
+  ];
+  const options = {
+    chart: {
+      title: "Company Performance",
+      subtitle: "Trucks, employees and customers ratio for 2022",
+    },
+  };
   return (
     <React.Fragment>
-      <div className="main-content">
+      <div className="statisticsSection d-flex row">
+        <div className="col-6 ordersSection">
+          <Chart
+            chartType="PieChart"
+            data={ordersByDateData}
+            options={ordersOptions}
+            width={"70%"}
+            height={"200px"}
+          />
+
+          <Chart
+            chartType="PieChart"
+            data={ordersByApproval}
+            options={ordersOptions}
+            width={"70%"}
+            height={"200px"}
+          />
+        </div>
+        <div className="col-6 ratioSection">
+          <Chart
+            chartType="Bar"
+            width="70%"
+            height="400px"
+            data={trucksEmployeeCustomerData}
+            options={options}
+          />
+        </div>
+      </div>
+      {/* <div className="main-content">
         <div className="header bg-gradient-primary pb-8 pt-5 pt-md-8">
           <div className="container-fluid">
             <h2 className="mb-5 text-white">Statistics summary</h2>
@@ -205,7 +263,7 @@ const StaticsPage = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </React.Fragment>
   );
 };
