@@ -170,3 +170,18 @@ label{
   margin-bottom: 1%;
 }
 
+.register{
+  margin-left: 20%;
+}
+
+.register input[type="password"]{
+  margin-top: 0%;
+  margin-right: 90%;
+  margin-left: 0%;
+}
+
+.register button{
+  margin-right: 50%;
+}
+
+
