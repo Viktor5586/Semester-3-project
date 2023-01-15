@@ -28,18 +28,12 @@ function Register() {
       isSubmitting: true,
       errorMessage: null,
     });
-    console.log(data.firstName);
-    console.log(data.lastName);
-    console.log(data.username);
-    console.log(data.password);
     if (
-      localStorage.getItem("employee") === null ||
-      localStorage.getItem("employee") === undefined
+      localStorage.getItem("employeeId") === null ||
+      localStorage.getItem("employeeId") === undefined
     ) {
-      console.log("A tuk vlizam tuk");
       UserAPI.user(data.firstName, data.lastName, data.username, data.password)
         .then((response) => {
-          console.log(response);
           navigateToPage("/");
         })
         .catch((error) => {
@@ -50,8 +44,6 @@ function Register() {
           });
         });
     } else {
-      console.log("Nqkak si vlizam tuk:" + localStorage.getItem("employee"));
-      axiosInterceptor();
       EmployeeAPI.create(
         data.firstName,
         data.lastName,
@@ -59,7 +51,6 @@ function Register() {
         data.password
       )
         .then((response) => {
-          console.log(response);
           navigateToPage("/");
         })
         .catch((error) => {

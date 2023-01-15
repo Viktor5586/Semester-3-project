@@ -28,8 +28,6 @@ export const Login = () => {
 
     LogInAPI.logInUser(data.username, data.password)
       .then((response) => {
-        console.log(response);
-        console.log(response.accessToken);
         dispatch({
           type: "LOGIN",
           payload: response.accessToken,

@@ -23,10 +23,7 @@ export const OrderPage = () => {
     // connect to the backend
     stompClient.connect({}, () => {
       // subscribe to the backend
-      stompClient.subscribe("/user/sendNotification", (data) => {
-        console.log(data);
-        //onMessageReceived(data);
-      });
+      stompClient.subscribe("/user/sendNotification", (data) => {});
     });
     // maintain the client for sending and receiving
     setStompClient(stompClient);
@@ -37,7 +34,6 @@ export const OrderPage = () => {
       id: notification.id,
       text: "New order has been sent",
     };
-    console.log(payload);
     stompClient.send(
       "/employee/employeeNotifications",
       {},
@@ -71,8 +67,7 @@ export const OrderPage = () => {
       isSubmitting: true,
       errorMessage: null,
     });
-    axiosInterceptor();
-    console.log("Height:" + data.height);
+    // axiosInterceptor();
     CargoAPI.order(
       data.height,
       data.width,

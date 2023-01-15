@@ -25,7 +25,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         isFetching: false,
-        orders: action.payload.cargoAllEntities, //винаги да казваш какво записваш от response-a
+        orders: action.payload.cargoAllEntities,
       };
     case "FETCH_ADV_FAILURE":
       return {
@@ -43,7 +43,7 @@ const refreshPage = () => {
 };
 
 const handleDeleteOrderButton = (orderId) => {
-  axiosInterceptor();
+  // axiosInterceptor();
   CargoAPI.deleteOrder(orderId);
   refreshPage();
 };

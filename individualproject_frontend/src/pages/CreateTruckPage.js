@@ -32,7 +32,7 @@ export const CreateTruckPage = () => {
       isSubmitting: true,
       errorMessage: null,
     });
-    axiosInterceptor();
+    // axiosInterceptor();
     TRUCKAPI.createTruck(
       data.licencePlate,
       data.location,

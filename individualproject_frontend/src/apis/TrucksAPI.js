@@ -1,6 +1,8 @@
 import axios, { AxiosHeaders } from "axios";
+import axiosInterceptor from "../apis/axiosInterceptor.js";
 
 const URL = "http://localhost:8080/trucks";
+axiosInterceptor();
 const GetTrucksAPI = {
   loadTrucks: () => axios.get(URL).then((response) => response.data),
   loadFilteredTrucks: (param, value) =>

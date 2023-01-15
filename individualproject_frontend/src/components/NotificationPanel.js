@@ -3,7 +3,6 @@ const NotificationReceived = (notification) => {
 };
 
 const NotificationPanel = (notification) => {
-  console.log("Notification in panel:" + notification.data);
   if (notification?.data) {
     return (
       <div

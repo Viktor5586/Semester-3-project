@@ -33,8 +33,6 @@ export const AccountCard = ({ firstName, lastName, username }) => {
       errorMessage: null,
     });
     if (data.firstName != "" && data.lastName != "") {
-      console.log(data.id);
-      console.log(data.newPassword);
       UserAPI.updateUser(
         data.id,
         data.firstName,
@@ -44,8 +42,6 @@ export const AccountCard = ({ firstName, lastName, username }) => {
         data.newPassword
       )
         .then((response) => {
-          console.log("NEWWWW:" + data.newPassword);
-          console.log(response);
           navigateToPage("/Truck");
         })
         .catch((error) => {
@@ -56,15 +52,10 @@ export const AccountCard = ({ firstName, lastName, username }) => {
           });
         });
     } else if (data.firstName === "" || data.lastName === "") {
-      console.log("a TUK sum");
       if (data.firstName === "") {
         data.firstName = firstName;
-        console.log("Ime 1 : " + data.firstName);
         if (data.lastName === "") {
-          console.log("LAST:");
-          console.log("davam: " + lastName);
           data.lastName = lastName;
-          console.log(data.lastName);
         }
         UserAPI.updateUser(
           data.id,
@@ -75,8 +66,6 @@ export const AccountCard = ({ firstName, lastName, username }) => {
           data.newPassword
         )
           .then((response) => {
-            console.log("NEWWWW:" + data.newPassword);
-            console.log(response);
             navigateToPage("/Truck");
           })
           .catch((error) => {
@@ -86,10 +75,8 @@ export const AccountCard = ({ firstName, lastName, username }) => {
               errorMessage: error.message || error.statusText,
             });
           });
-        console.log("first");
       }
       if (data.firstName !== "" && data.lastName !== "") {
-        console.log("TUK sum");
         UserAPI.updateUser(
           data.id,
           data.firstName,
@@ -99,7 +86,6 @@ export const AccountCard = ({ firstName, lastName, username }) => {
           data.newPassword
         )
           .then((response) => {
-            console.log(response);
             navigateToPage("/Home");
           })
           .catch((error) => {
@@ -122,7 +108,6 @@ export const AccountCard = ({ firstName, lastName, username }) => {
     });
     UserAPI.deleteUser(data.id) //localStorage.getItem("customerId")
       .then((response) => {
-        console.log(response);
         localStorage.clear();
         navigateToPage("/");
         refreshPage();

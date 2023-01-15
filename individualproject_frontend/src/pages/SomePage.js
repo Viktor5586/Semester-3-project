@@ -18,9 +18,7 @@ function SomePage() {
     stompClient.connect({}, () => {
       // subscribe to the backend
       stompClient.subscribe("/employee/employeeNotifications", (data) => {
-        console.log("HELLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOO" + data);
         onMessageReceived(data);
-        //onUsernameInformed();
       });
     });
     // maintain the client for sending and receiving
@@ -28,8 +26,7 @@ function SomePage() {
   }, []);
   const onMessageReceived = (data) => {
     const notification = JSON.parse(data.body);
-    // console.log("Tuk sum" + data.body);
-    showToastMessage(data.body);
+    showToastMessage("New order has been created");
     setNotificationsReceived((notificationsReceived) => [
       ...notificationsReceived,
       notification,
@@ -50,17 +47,10 @@ function SomePage() {
     });
   }, []);
   const showToastMessage = (notification) => {
-    //console.log("Text:" + notification);
     toast.success(notification, {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
-
-  // const onUsernameInformed = () => {
-  //   stompClient.subscribe(`/employee/employeeNotifications`, (data) => {
-  //     onMessageReceived(data);
-  //   });
-  // };
   return (
     <div>
       <ToastContainer />

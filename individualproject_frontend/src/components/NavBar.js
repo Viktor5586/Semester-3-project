@@ -16,10 +16,8 @@ function NavBar() {
   };
 
   const authorize = (roles) => {
-    console.log("Sth:" + roles);
     switch (roles) {
       case "CUSTOMER":
-        console.log("I'm here");
         return (
           <div className="text-end">
             <Link to="/Truck" className="btn btn-outline-light me-2">
@@ -40,7 +38,6 @@ function NavBar() {
             </Link>
           </div>
         );
-        console.log(roles);
       case "EMPLOYEE":
         return (
           <div className="text-end">
@@ -93,8 +90,7 @@ function NavBar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         {authState.isAuthenticated ? (
-          (console.log("vliza v auth"),
-          authorize(localStorage.getItem("roles")))
+          authorize(localStorage.getItem("roles"))
         ) : localStorage.getItem("token") === null ||
           localStorage.getItem("token") === undefined ? (
           <div className="text-end">
@@ -106,8 +102,7 @@ function NavBar() {
             </Link>
           </div>
         ) : (
-          (console.log("vliza s rolq"),
-          authorize(localStorage.getItem("roles")))
+          authorize(localStorage.getItem("roles"))
         )}
       </nav>
     </div>

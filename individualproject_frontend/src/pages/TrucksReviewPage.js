@@ -42,12 +42,9 @@ export const TruckReviewPage = () => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
   const handleDeleteTruckButton = (truckId) => {
-    console.log("ID:::::" + truckId);
-    axiosInterceptor();
+    // axiosInterceptor();
     TruckAPI.deleteTruck(truckId);
     refreshPage();
-    // когато изтрия нещо, не се презарежда страницата,
-    //  а трябва ръчно да го направя и тогава изтрития камион изчезва
   };
 
   React.useEffect(() => {

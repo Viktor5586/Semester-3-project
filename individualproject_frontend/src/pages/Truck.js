@@ -6,8 +6,6 @@ import TruckCard from "../components/TruckCard";
 import { render } from "@testing-library/react";
 import styles from "../components/Truck.css";
 
-//взимам параметрите правилно и ги подавам към апи и резултатът е правилен,но не знам как да презаредя страницата с новите резултати
-
 const initialState = {
   trucks: [],
   filteredTrucks: [],

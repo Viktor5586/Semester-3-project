@@ -1,6 +1,8 @@
 import axios from "axios";
+import axiosInterceptor from "../apis/axiosInterceptor.js";
 
 const URL = "http://localhost:8080/employees";
+axiosInterceptor();
 const EmployeeAPI = {
   create: (firstName, lastName, username, password) =>
     axios
